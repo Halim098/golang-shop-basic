@@ -35,6 +35,10 @@ func setPassword(pass, id string) string {
 	return string(password)
 }
 
+func NewCustomer() *DataCustomer {
+	return &DataCustomer{}
+}
+
 func (c *DataCustomer) Register(username, password string) (string, error) {
 	regex, err := regexp.Compile(`[a-zA-Z]{5,}`)
 	if err != nil {
@@ -44,7 +48,7 @@ func (c *DataCustomer) Register(username, password string) (string, error) {
 	if !regex.MatchString(password) {
 		return "", CustomError{MsgError: "Password must be at least 5 characters"}
 	}
-	
+
 	for i := range c.Data {
 		if c.Data[i].Username == username {
 			return "", CustomError{MsgError: "Username already exist"}
