@@ -2,6 +2,7 @@ package entity
 
 import (
 	"crypto/sha1"
+	"regexp"
 	"strconv"
 	"time"
 )
@@ -35,6 +36,15 @@ func setPassword(pass, id string) string {
 }
 
 func (c *DataCustomer) Register(username, password string) (string, error) {
+	regex, err := regexp.Compile(`[a-zA-Z]{5,}`)
+	if err != nil {
+		return "", CustomError{MsgError: "Regex error"}
+	}
+
+	if !regex.MatchString(password) {
+		return "", CustomError{MsgError: "Password must be at least 5 characters"}
+	}
+	
 	for i := range c.Data {
 		if c.Data[i].Username == username {
 			return "", CustomError{MsgError: "Username already exist"}
