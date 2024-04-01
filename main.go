@@ -87,8 +87,9 @@ func main() {
 			case 4:
 				fmt.Println("Thanks :)")
 				acc = ""
-			default :
+			default:
 				fmt.Println("Invalid input")
+			}
 		}
 	}
 }
