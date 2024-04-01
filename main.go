@@ -124,7 +124,8 @@ func main() {
 				}
 				time.Sleep(3 * time.Second)
 			case 4:
-
+				fmt.Println("===== Checkout =====")
+				
 			case 5:
 				fmt.Println("Thanks :)")
 				acc = ""
