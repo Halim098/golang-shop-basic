@@ -2,9 +2,9 @@ package main
 
 import (
 	"fmt"
-	"time"
 
 	"github.com/Halim098/golang-shop-basic/entity"
+	"github.com/Halim098/golang-shop-basic/helper"
 )
 
 func main() {
@@ -16,6 +16,7 @@ func main() {
 
 	for loop {
 		if acc == "" {
+			helper.ClearScreen()
 			fmt.Println("1. Login")
 			fmt.Println("2. Register")
 			fmt.Println("3. Exit")
@@ -24,6 +25,7 @@ func main() {
 			fmt.Scanln(&choose)
 			switch choose {
 			case 1:
+				helper.ClearScreen()
 				fmt.Println("===== Login =====")
 				fmt.Print("Enter your username: ")
 				name := ""
@@ -39,9 +41,10 @@ func main() {
 					fmt.Println(msg)
 					acc = acc2
 				}
-				// time.Sleep(3 * time.Second)
+				helper.Delay(3)
 
 			case 2:
+				helper.ClearScreen()
 				fmt.Println("===== Register =====")
 				fmt.Print("Enter your username: ")
 				name := ""
@@ -56,19 +59,20 @@ func main() {
 				} else {
 					fmt.Println(msg)
 				}
-				// time.Sleep(3 * time.Second)
+				helper.Delay(3)
 
 			case 3:
+				helper.ClearScreen()
 				fmt.Println("Bye")
 				loop = false
-
 			default:
 				fmt.Println("Invalid input")
-				time.Sleep(3 * time.Second)
+				helper.Delay(3)
 			}
 		}
 
 		if acc != "" {
+			helper.ClearScreen()
 			fmt.Println("Hi, ", acc)
 			fmt.Println("==============")
 			fmt.Println("1. Add to cart")
@@ -81,6 +85,7 @@ func main() {
 			fmt.Scanln(&choose)
 			switch choose {
 			case 1:
+				helper.ClearScreen()
 				fmt.Println("===== Product =====")
 				for i := range entity.DataProduct {
 					fmt.Println("Neme :", entity.DataProduct[i].Name, "\nPrice :", entity.DataProduct[i].Price, "\nStock :", entity.DataProduct[i].Stock)
@@ -99,15 +104,17 @@ func main() {
 				} else {
 					fmt.Println("Success add to cart")
 				}
-				time.Sleep(3 * time.Second)
+				helper.Delay(3)
 			case 2:
+				helper.ClearScreen()
 				fmt.Println("===== Show cart =====")
 				for _, v := range cart.GetCart() {
 					fmt.Println("Product :", v.Product.Name, "\nPrice :", v.Product.Price, "\nQuantity :", v.Quantity)
 					fmt.Println("==============")
 				}
-				time.Sleep(5 * time.Second)
+				helper.Delay(5)
 			case 3:
+				helper.ClearScreen()
 				fmt.Println("===== Remove from cart =====")
 				for i, v := range cart.GetCart() {
 					fmt.Println(i+1, "Product :", v.Product.Name)
@@ -122,8 +129,9 @@ func main() {
 				} else {
 					fmt.Println(msg)
 				}
-				time.Sleep(3 * time.Second)
+				helper.Delay(3)
 			case 4:
+				helper.ClearScreen()
 				fmt.Println("===== Checkout =====")
 				payment := entity.NewPayment()
 				err := payment.AddItem(cart)
@@ -145,14 +153,15 @@ func main() {
 					fmt.Println(msg)
 					cart.ResetCart()
 				}
-				time.Sleep(3 * time.Second)
+				helper.Delay(3)
 			case 5:
+				helper.ClearScreen()
 				fmt.Println("Thanks :)")
 				acc = ""
-				time.Sleep(3 * time.Second)
+				helper.Delay(3)
 			default:
 				fmt.Println("Invalid input")
-				time.Sleep(3 * time.Second)
+				helper.Delay(3)
 			}
 		}
 	}
