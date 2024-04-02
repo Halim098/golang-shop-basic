@@ -125,7 +125,27 @@ func main() {
 				time.Sleep(3 * time.Second)
 			case 4:
 				fmt.Println("===== Checkout =====")
-				
+				payment := entity.NewPayment()
+				err := payment.AddItem(cart)
+				if err != nil {
+					fmt.Println(err)
+				} else {
+					fmt.Println("Total :", payment.Total)
+					fmt.Println("=============")
+				}
+				fmt.Print("Enter your money: ")
+				money := 0
+				fmt.Scanln(&money)
+				change, msg, err := payment.Pay(money)
+				if err != nil {
+					fmt.Println(err)
+				} else {
+					fmt.Println("Change :", change)
+					fmt.Println("")
+					fmt.Println(msg)
+					cart.ResetCart()
+				}
+				time.Sleep(3 * time.Second)
 			case 5:
 				fmt.Println("Thanks :)")
 				acc = ""

@@ -17,12 +17,17 @@ func NewProduct() *Product {
 	return &Product{}
 }
 
-func (dp *Product) ReduceStock(quantity int) error {
-	if dp.Stock < quantity {
-		return CustomError{"Stock is not enough"}
+func (dp *Product) ReduceStock(name string, quantity int) error {
+	for i := range DataProduct {
+		if name == DataProduct[i].Name {
+			if DataProduct[i].Stock < quantity {
+				return CustomError{"Stock is not enough"}
+			}
+			DataProduct[i].Stock -= quantity
+			return nil
+		}
 	}
-	dp.Stock -= quantity
-	return nil
+	return CustomError{"Product not found"}
 }
 
 func (dp *Product) GetProductByName(name string) (Product, error) {
